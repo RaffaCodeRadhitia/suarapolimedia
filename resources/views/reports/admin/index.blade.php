@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <h3 class="mb-4">Daftar Laporan Pengaduan</h3>
     <h4 class="mb-4">Admin</h4>
-    <a href="{{ route('reports.create') }}" class="btn btn-sm btn-primary">Create</a>
+    {{-- <a href="{{ route('reports.create') }}" class="btn btn-sm btn-primary">Create</a> --}}
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

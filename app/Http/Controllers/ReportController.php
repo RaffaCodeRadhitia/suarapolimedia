@@ -16,6 +16,9 @@ class ReportController extends Controller
     {
         $reports = Report::with('user')->latest()->get();
         $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
 
         if ($user && $user->role == 'admin') {
             return view('reports.admin.index', compact('reports'));
@@ -27,12 +30,20 @@ class ReportController extends Controller
 
     public function create()
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         return view('reports.create');
     }
 
 
     public function store(Request $request)
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $request->validate([
             'description' => 'required',
             'photo'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -56,6 +67,10 @@ class ReportController extends Controller
 
     public function show($id)
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $report = Report::with('user')->findOrFail($id);
         return view('reports.show', compact('report'));
     }
@@ -63,6 +78,10 @@ class ReportController extends Controller
 
     public function edit($id)
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $report = Report::findOrFail($id);
         $user = session('user');
 
@@ -75,6 +94,10 @@ class ReportController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $request->validate([
             'status' => 'required|in:menunggu,diproses,selesai',
         ]);
@@ -87,6 +110,10 @@ class ReportController extends Controller
 
     public function update(Request $request, $id)
 {
+    $user = session('user');
+    if (!$user) {
+        return redirect()->route('login');
+    }
     $report = Report::findOrFail($id);
 
     $request->validate([
@@ -116,6 +143,10 @@ class ReportController extends Controller
 
     public function destroy($id)
     {
+        $user = session('user');
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $report = Report::findOrFail($id);
         if ($report->photo) {
             Storage::disk('public')->delete($report->photo);

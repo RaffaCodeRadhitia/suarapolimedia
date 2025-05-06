@@ -17,7 +17,7 @@ class AuthSession
     public function handle(Request $request, Closure $next): Response
     {
         // $user = session('user');
-        // if (!$user && !$request->is('login', 'register')) {
+        // if (!Auth::check() && !in_array($request->path(), ['login', 'register'])) {
         //     return redirect()->route('login');
         // }
 
