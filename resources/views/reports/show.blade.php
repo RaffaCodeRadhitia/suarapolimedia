@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
+    <a href="{{ url('/') }}" class="btn btn-sm btn-secondary">Back</a>
     <h3 class="mb-4">Detail Laporan</h3>
 
     <div class="card p-4 shadow-sm">

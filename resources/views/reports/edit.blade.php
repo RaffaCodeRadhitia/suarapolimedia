@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
+    <a href="{{ url('/') }}" class="btn btn-sm btn-secondary">Back</a>
     <h3 class="mb-4">Edit Laporan</h3>
 
     @if ($errors->any())
@@ -33,11 +34,7 @@
 
         <div class="mb-3">
             <label class="form-label">Status</label>
-            <select name="status" class="form-select" required>
-                <option value="menunggu" {{ $report->status == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
-                <option value="diproses" {{ $report->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
-                <option value="selesai"  {{ $report->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
-            </select>
+            <input type="text" name="status" class="form-control" value="{{ $report->status }}" readonly>
         </div>
 
         <button class="btn btn-primary">Simpan Perubahan</button>
